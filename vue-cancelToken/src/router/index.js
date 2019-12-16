@@ -1,7 +1,7 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router'
+import VueRouter from 'vue-router';
 
-Vue.use(VueRouter)
+Vue.use(VueRouter);
 
 export default new VueRouter({
   routes: [
@@ -14,13 +14,13 @@ export default new VueRouter({
     {
       path: '/data',
       name: 'data',
-      component: () => import('../views/Data')
+      component: () => import('../views/DataManage')
     },
     {
       path: '/message',
       name: 'message',
-      component: () => import('../views/Message')
+      component: () => import('../views/MessageManage')
     }
   ]
-})
+});
 

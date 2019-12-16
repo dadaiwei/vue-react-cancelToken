@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h2>个人财产表</h2>
     <el-table border :data="data" v-loading="loading">
       <el-table-column
         v-for="c in columns"
@@ -26,15 +25,16 @@
 import cancelTokenMixin from '../mixin/cancelTokenMixin'
 
 export default {
-  name: 'Data',
+  name: 'DataManage',
   mixins: [cancelTokenMixin],
   data () {
     return {
+      pageName: '数据管理页面',
       allData: [],
       data: [],
-      loading: false,
       pageId: 1,
       pageSize: 10,
+      loading: false,
       columns: [
         {
           prop: 'index',
@@ -47,15 +47,21 @@ export default {
           align: 'center'
         },
         {
-          prop: 'age',
-          label: '年龄',
+          prop: 'num',
+          label: '个数',
           align: 'center'
         },
         {
-          prop: 'money',
-          label: '财产',
+          prop: 'price',
+          label: '价格',
           align: 'center',
-          formatter: row => `${row.money}元`
+          formatter: row => `${row.price}元`
+        },
+        {
+          prop: 'total',
+          label: '总价',
+          align: 'center',
+          formatter: row => `${row.total}元`
         }
       ]
     }
@@ -66,14 +72,17 @@ export default {
   methods: {
     getData () {
       this.loading = true
-      axios.get('http://localhost:7000/message', { cancelToken: this.cancelToken }).then(res => {
+      axios.get('http://localhost:7000/data', { cancelToken: this.cancelToken }).then(res => {
         const data = res.data
         if (data.success) {
-          this.allData = data.message
+          this.allData = data.fruits
           this.changePage()
         }
       }).catch(err => {
-        console.log(`信息管理页面${err.message}`)
+        this.$message({
+          type: 'error',
+          message: err.message || '获取数据失败'
+        })
       }).finally(() => {
         this.loading = false
       })
