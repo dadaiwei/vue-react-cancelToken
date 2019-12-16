@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Switch, Route } from 'react-router-dom';
-import DataManage from './views/DataManage.jsx';
-import MessageManageponent from './views/MessageManage.jsx';
+import DataManage from './DataManage.jsx';
+import MessageManageponent from './MessageManage.jsx';
 
 class Home extends Component {
   render () {

@@ -58,20 +58,17 @@ class DataManage extends Component {
       if (res.data && res.data.success) {
         const data = get(res, 'data.fruits', []);
         this.setState({
-          data
+          data,
+          loading: false
         });
       }
     }).catch(err => {
       message.error(err.message || '获取数据失败');
-    }).finally(() => {
-      this.setState({
-        loading: false
-      });
     });
   }
 
   componentWillUnmount () {
-    this.cancel('取消请求');
+    this.cancel('取消数据管理页面请求');
   }
 
   render () {

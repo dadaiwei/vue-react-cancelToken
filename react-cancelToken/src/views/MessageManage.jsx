@@ -2,11 +2,19 @@ import React, { useState, useEffect } from 'react';
 import { Table, message } from 'antd';
 import get from 'lodash/get';
 import axios from 'axios';
-import useCancelToken from '../hooks/useCancelToken';
+import { generateCancelToken } from '../utils/index';
+
+let cancel = null;
+let cancelToken = null;
 
 function MessageManageponent () {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
+  if (!cancel && !cancelToken) {
+    const { cancel: cancelIns, cancelToken: cancelTokenIns } = generateCancelToken();
+    cancel = cancelIns;
+    cancelToken = cancelTokenIns;
+  }
   const columns = [
     {
       title: '索引',
@@ -33,22 +41,23 @@ function MessageManageponent () {
 
   const getMessageData = () => {
     setLoading(true);
-    axios.get('http://localhost:7000/message').then(res => {
+    axios.get('http://localhost:7000/message', { cancelToken }).then(res => {
       if (res.data && res.data.success) {
         const data = get(res, 'data.message', []);
         setData(data);
+        setLoading(false);
       }
     }).catch(err => {
       message.error(err.message || '获取数据失败');
-    }).finally(() => {
-      setLoading(false);
     });
   };
 
   useEffect(() => {
     getMessageData();
     return () => {
-      // cancel('取消请求');
+      cancel('取消信息管理页面请求');
+      cancel = null;
+      cancelToken = null;
     };
   }, []);
 
@@ -62,5 +71,6 @@ function MessageManageponent () {
       locale={{ emptyText: '暂无数据' }}>
     </Table>);
 }
+
 
 export default MessageManageponent;
