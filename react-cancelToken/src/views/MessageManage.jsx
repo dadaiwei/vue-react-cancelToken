@@ -48,9 +48,9 @@ function MessageManageponent () {
         setLoading(false);
       }
     }).catch(err => {
-      const message = err.message || '获取数据失败';
-      console.log(message);
-      message.error(message);
+      const errMessage = err.message || '获取数据失败';
+      console.log(errMessage);
+      message.error(errMessage);
     });
   };
 
