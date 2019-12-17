@@ -79,9 +79,11 @@ export default {
           this.changePage()
         }
       }).catch(err => {
+        const message = err.message || '获取数据失败';
+        console.log(message);
         this.$message({
           type: 'error',
-          message: err.message || '获取数据失败'
+          message
         })
       }).finally(() => {
         this.loading = false

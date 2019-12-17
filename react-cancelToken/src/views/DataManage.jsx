@@ -63,7 +63,9 @@ class DataManage extends Component {
         });
       }
     }).catch(err => {
-      message.error(err.message || '获取数据失败');
+      const message = err.message || '获取数据失败';
+      console.log(message);
+      message.error(message);
     });
   }
 
