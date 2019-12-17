@@ -1,0 +1,12 @@
+{
+  "name": "react-canceltoken",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "server": "cd server && node index",
+    "vue-dev": "cd vue-cancelToken && npm run serve",
+    "vue-build": "cd vue-cancelToken && npm run build",
+    "react-dev": "cd react-cancelToken && npm run start",
+    "react-build": "cd react-cancelToken && npm run build"
+  }
+}
