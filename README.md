@@ -165,9 +165,8 @@ export default {
 从信息管理tab切换到数据管理tab时，message接口状态变为cancel状态，请求也成功取消。
 ![信息管理切换到信息管理tab](./assets/vue_message_manage.png)
 
-> 总结：
-<br>
-> 在vue中可以将取消请求初始化的逻辑封装到mixin中，然后各组件引入mixin，request请求设置cancelToken参数即可。
+>总结：<br>
+>在vue中可以将取消请求初始化的逻辑封装到mixin中，然后各组件引入mixin，request请求设置cancelToken参数即可。
 
 ## 3.react使用HOC组件取消请求
 由于react官方不推荐使用mixin。因此，我们可以公共逻辑封装到公用方法中，然后封装到高阶组件中，业务组件引入高阶组件即可。
@@ -306,10 +305,10 @@ export default withCancelRequest(MessageManageponent, '信息管理页面');
 ![信息管理取消请求](./assets/react_message_manage.png)
 
 ## 4.总结
-> 1.vue组件取消请求可以将业务逻辑封装到Mixin中，然后组件引入Mixin即可。
-> 2.react组件取消请求通过HOC组件实现，业务组件使用HOC组件包装。
-
-[代码地址](https://github.com/dadaiwei/vue-react-cancelToken)（包含上述react和vue项目完整代码）
+- 1.vue组件取消请求可以将业务逻辑封装到Mixin中，然后组件引入Mixin即可。
+- 2.react组件取消请求通过HOC组件实现，业务组件使用HOC组件包装。
 
 ## 结语
-以上就是博主探索的react和vue组件销毁取消请求的一点小实践，觉得有收获的可以关注一波，点赞一波，码字不易，万分感谢。
+以上就是博主关于react和vue组件销毁取消请求的一点小实践，觉得有收获的可以关注一波，点赞一波，码字不易，万分感谢。
+
+[代码地址](https://github.com/dadaiwei/vue-react-cancelToken)（包含上述react和vue项目完整代码）
