@@ -1,4 +1,14 @@
 # vue和react中如何优雅地使用axios取消请求
+## 目录说明
+- react-cancelToken：react项目目录，基于HOC组件实现组件销毁取消请求
+- vue-cancelToken：vue项目目录，基于Mixin实现组件销毁取消请求
+- server：基于koa实现的server，提供接口给前端用，主要提供2个接口：
+
+http://localhost:7000/data（数据管理）
+<br>
+http://localhost:7000/message（信息管理）
+
+
 ## 运行步骤
 1.先启动server
 ```
