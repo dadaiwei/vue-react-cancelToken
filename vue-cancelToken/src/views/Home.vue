@@ -32,7 +32,7 @@ export default {
       this.activeName = tab
       this.$router.push({
         name: tab
-      })
+      }).catch(() => {})
     }
   }
 }

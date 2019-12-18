@@ -2,19 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { Table, message } from 'antd';
 import get from 'lodash/get';
 import axios from 'axios';
-import { generateCancelToken } from '../utils/index';
+import withCancelRequest from '../hoc/withCancelRequest';
 
-let cancel = null;
-let cancelToken = null;
-
-function MessageManageponent () {
+function MessageManageponent (props) {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  if (!cancel && !cancelToken) {
-    const { cancel: cancelIns, cancelToken: cancelTokenIns } = generateCancelToken();
-    cancel = cancelIns;
-    cancelToken = cancelTokenIns;
-  }
+  const { cancelToken } = props;
   const columns = [
     {
       title: '索引',
@@ -54,14 +47,7 @@ function MessageManageponent () {
     });
   };
 
-  useEffect(() => {
-    getMessageData();
-    return () => {
-      cancel('取消信息管理页面请求');
-      cancel = null;
-      cancelToken = null;
-    };
-  }, []);
+  useEffect(getMessageData, []);
 
   return (
     <Table
@@ -74,5 +60,4 @@ function MessageManageponent () {
     </Table>);
 }
 
-
-export default MessageManageponent;
+export default withCancelRequest(MessageManageponent, '信息管理页面');

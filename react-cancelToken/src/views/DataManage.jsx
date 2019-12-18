@@ -2,14 +2,11 @@ import React, { Component } from 'react';
 import { Table, message } from 'antd';
 import axios from 'axios';
 import get from 'lodash/get';
-import { generateCancelToken } from '../utils/index';
+import withCancelRequest from '../hoc/withCancelRequest';
 
 class DataManage extends Component {
   constructor(props) {
     super(props);
-    const { cancel, cancelToken } = generateCancelToken();
-    this.cancelToken = cancelToken;
-    this.cancel = cancel;
     this.state = {
       data: [],
       loading: false
@@ -51,10 +48,11 @@ class DataManage extends Component {
   }
 
   componentDidMount () {
+    const { cancelToken } = this.props;
     this.setState({
       loading: true
     });
-    axios.get('http://localhost:7000/data', { cancelToken: this.cancelToken }).then(res => {
+    axios.get('http://localhost:7000/data', { cancelToken }).then(res => {
       if (res.data && res.data.success) {
         const data = get(res, 'data.fruits', []);
         this.setState({
@@ -67,10 +65,6 @@ class DataManage extends Component {
       console.log(errMessage);
       message.error(errMessage);
     });
-  }
-
-  componentWillUnmount () {
-    this.cancel('取消数据管理页面请求');
   }
 
   render () {
@@ -87,4 +81,4 @@ class DataManage extends Component {
   }
 }
 
-export default DataManage;
+export default withCancelRequest(DataManage, '数据管理页面');
