@@ -261,7 +261,7 @@ class DataManage extends Component {
   ...
 }
 
-// 使用高阶组件包装业务组件
+// 导出高阶组件包装的业务组件
 export default withCancelRequest(DataManage, '数据管理页面');
 ```
 function组件MessageManage引用`withCancelRequest`：
@@ -295,7 +295,7 @@ function MessageManageponent (props) {
   ...
 }
 
-// 使用高阶组件包装业务组件
+// 导出高阶组件包装的业务组件
 export default withCancelRequest(MessageManageponent, '信息管理页面');
 ```
 数据管理页面仍然调用`http://localhost:7000/data`接口，信息管理页面调用`http://localhost:7000/message`接口。
